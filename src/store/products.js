@@ -1,3 +1,6 @@
+import axios from 'axios'
+import { useEffect } from 'react'
+
 let initialState = {
     products: [
         {category: 'stuff', name: 'thingy1', description: 'thingy1 description', price: '$1', count: 3},
@@ -33,5 +36,15 @@ export const addToCart = (product) => {
     return {
         type: 'Add',
         payload: product
+    }
+}
+
+export const fetchData = () => {
+    return async function (dispatch) {
+        const response = await axios.get('https://api-js401.herokuapp.com/api/v1')
+        //https://swapi.dev/api/people/1')
+        //https://api-js401.herokuapp.com/api/v1')
+        console.log(response)
+        dispatch({  type: 'Change' ,response })
     }
 }
